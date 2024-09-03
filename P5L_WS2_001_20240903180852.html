@@ -72,8 +72,8 @@ let index = 0;
 
 function preload() {
 	img[0] = loadImage('https://i.imgur.com/tuiHkdF.png');
-	// img[1] = loadImage('https://i.imgur.com/MrIxEcZ.png');
-	// img[2] = loadImage('https://i.imgur.com/x0oUDkF.png');
+	img[1] = loadImage('https://i.imgur.com/MrIxEcZ.png');
+	img[2] = loadImage('https://i.imgur.com/x0oUDkF.png');
 	// testimg = loadImage('https://i.imgur.com/ZD2mOsV.png');
 
 }
@@ -85,9 +85,9 @@ function setup() {
 	xspeed = 3;
 	yspeed = 3;
 	
-	// img[0].resize(300, 0);
-	// img[1].resize(300, 0);
-	// img[2].resize(300, 0);
+	for(i = 0; i < img.length; i++){
+		img[i].resize(350, 0);
+	}
 	
 	textAlign(CENTER, CENTER);
 	textSize(width/10);
@@ -102,31 +102,35 @@ function setup() {
 function draw() {
   background(0, 15);
   
-  // blendMode(DIFFERENCE);
+  //blendMode(DIFFERENCE);
   
 	text('LEM_PEP_JACK', width/2, height/2);
   
   //translate(-width/2, -height/2);
   
-  image(img[0], x, y);
+  image(img[index], x, y);
 
   x = x + xspeed;
   y = y + yspeed;
 
-  if (x + img[0].width >= width) {
+  if (x + img[index].width >= width) {
     xspeed = -xspeed;
-    x = width - img[0].width;
+    x = width - img[index].width;
+    index = (index + 1) % img.length;
   } else if (x <= 0) {
     xspeed = -xspeed;
     x = 0;
+    index = (index + 1) % img.length;
   }
 
-  if (y + img[0].height >= height) {
+  if (y + img[index].height >= height) {
     yspeed = -yspeed;
-    y = height - img[0].height;
+    y = height - img[index].height;
+    index = (index + 1) % img.length;
   } else if (y <= 0) {
     yspeed = -yspeed;
     y = 0;
+    index = (index + 1) % img.length;
   }
 
 }
